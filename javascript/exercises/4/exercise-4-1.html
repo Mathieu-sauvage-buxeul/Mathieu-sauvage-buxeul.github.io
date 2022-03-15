@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Women4IT - JavaScript</title>
+    <meta name="description" content="Women4IT JavaScript Exercise: Variables -1">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Customise Bootstrap for practical grid layouts -->
+    <link rel="stylesheet" href="../assets/css/bootstrap-custom.css">
+    <style>
+        .container { padding-top: 40px }
+        .js-box {
+            border:solid 1px yellow;
+            padding:20px;
+            background-color: lightyellow;
+            margin-bottom:20px;
+            font-size: larger;
+        }
+		.js-box p:last-child { margin-bottom: 0 }
+    </style>
+
+</head>
+
+
+<body>
+    <div class="container col-md-8 offset-md-2">
+        <h1><b>Exercise 4-1</b>: JavaScript Functions</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla exercitationem ipsum enim natus soluta rem eos? In dicta eius, reprehenderit illo odit mollitia nulla ex et odio minus expedita numquam! minus expedita numquam!</p>
+
+		<div class="js-box">
+
+			<script>
+                // Function expression
+                const greeting = (function displayGreeting() {
+                console.log("Hello, world!");
+                });
+
+
+                // Function declaration with parameters		
+                function sumA(a, b) {
+                console.log(`Output A: ${a + b}`);
+                }
+
+                // Function call with arguments
+                sumA(1, 2);
+
+
+
+                // Anonymous function expression with parameters	
+                const sumB = function (a, b) {
+                console.log(`Output B: ${a + b}`);
+                };
+
+                // Function call with arguments
+                sumB(3, 4);
+
+
+
+                // Arrow function with parameters	
+                const sumC = (a, b) => console.log(`Output C: ${a + b}`); 
+
+                // Function call with arguments
+                sumC(5, 6);
+
+
+
+                averageThreeNums = (x,y,z) => {
+                let result = (x + y + z)/3;
+                console.log(`Average of three numbers is: ${result}`);
+                }
+
+                averageThreeNums(1,2,3,4,5,6); // ignores 4, 5, 6
+                averageThreeNums(1,2,3,4,5); // ignores 4, 5
+                averageThreeNums(1,2,3,4); // ignores 4
+                averageThreeNums(1,2,3);
+                // result is always '2'
+                
+			</script>
+
+		</div>
+
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla exercitationem ipsum enim natus soluta rem eos? In dicta eius, reprehenderit illo odit mollitia nulla ex et odio minus expedita numquam! minus expedita numquam!</p>
+
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla exercitationem ipsum enim natus soluta rem eos? In dicta eius, reprehenderit illo odit mollitia nulla ex et odio minus expedita numquam! minus expedita numquam!</p>
+    </div>
+
+
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
