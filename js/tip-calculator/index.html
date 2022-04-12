@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tip Calculator Project | Mathieu Sauvage | Front-end Developer | </title>
+    <meta name="description" content="Calculates the tip for a restaurant bill based on the level of service and the number of customers.">
+
+	<!-- Stylesheets -->
+    <link rel="stylesheet" href="../../../assets/css/lunadoge.min.css" />
+    <link rel="stylesheet" href="../../../assets/css/css-javascript.css" />
+
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
+    <style>
+
+        /* Global font */
+        body { font-family: 'Roboto', serif; }
+
+        /* Menu */
+        .container-menu a#btn-cta:link,
+        .container-menu a#btn-cta:visited { background-color: #fd7e14 }
+        .container-menu a#btn-cta:link,
+        .container-menu a#btn-cta:visited { border-color: #fd7e14 }
+        .container-menu a#btn-cta:focus,
+        .container-menu a#btn-cta:hover,
+        .container-menu a#btn-cta:active { border-color: #fd7e14 }
+        .container-menu a#btn-cta:focus,
+        .container-menu a#btn-cta:hover,
+        .container-menu a#btn-cta:active { border-color: #fd7e14 }
+        .container-menu a#btn-cta:focus,
+        .container-menu a#btn-cta:hover,
+        .container-menu a#btn-cta:active { background-color: #fd9843 }
+        .container-menu.menu-desktop { background-color: #212529 }
+        .container-menu.menu-mobile { background-color: #212529 }
+        .container-menu.menu-mobile ul.mobile-display { background-color: #212529 }
+        .container-menu a:link,
+        .container-menu a:visited { color: #fff }
+        .container-menu a:focus,
+        .container-menu a:hover,
+        .container-menu a:active { color: #ced4da }
+
+        /* Hero Block */
+        header.hero-block-js h1 { color: #fff }
+        header.hero-block-js h2 {
+            color: #adb5bd;
+            font-size: calc(18px + (26 - 18) * ((100vw - 320px) / (1600 - 320)));
+        }
+        header.hero-block-js { background-color: #212529}
+
+        /* Main Colours */
+        .theme-js { 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: auto;
+            width: 45%;
+            text-align: center;
+        }
+
+        .theme-js p { 
+            color: #212529;
+            font-size: 25px;
+            margin-top: 25px;
+         }
+        .theme-js button { padding: 15px 50px; margin: 50px auto; font-size: 15px;}
+        .container-flex { 
+            margin: 50px auto;
+            background: linear-gradient(130deg, rgba(254,234,184,1) 0%, rgba(255,214,111,1) 100%);
+            border-radius: 35px;
+        }
+
+        .theme-js input,  .theme-js select{
+            height: 40px;
+            width: 100%;
+            font-size: 20px;
+            text-align: center;
+            border: solid 2px #ccc;
+            border-radius: 35px;
+            margin-top: 10px;
+            background-color: #ffffff80;
+            border-color: #ffd670;
+        }
+
+        #tipDisplayBox {
+            margin-top: 75px;
+        }
+
+        #tipDisplayBox p {
+            margin-top: 0;
+            font-size: 35px;
+        }
+
+        /* Button */
+        .theme-js button { border: none; color: #fff; background-color: #000; transition: 0.2s }
+        .theme-js button:hover { background-color: #495057 }
+
+        /* Footer */
+        footer h2 { color: #fff; }
+        footer h3 { color: #fd7e14; }
+        footer { background-color: #343a40; }
+        .footer-links, .footer-icons {  color: #fff; }
+
+        /**
+        * ----------------------------------------
+        * animation scale-in-left
+        * ----------------------------------------
+        */
+
+        .scale-in-left {
+	        -webkit-animation: scale-in-left 0.8s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	        animation: scale-in-left 0.8s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+        }
+
+        @-webkit-keyframes scale-in-left {
+        0% {
+            -webkit-transform: scale(0);
+                    transform: scale(0);
+            -webkit-transform-origin: 0% 50%;
+                    transform-origin: 0% 50%;
+            opacity: 1;
+        }
+        100% {
+            -webkit-transform: scale(1);
+                    transform: scale(1);
+            -webkit-transform-origin: 0% 50%;
+                    transform-origin: 0% 50%;
+            opacity: 1;
+        }
+        }
+        @keyframes scale-in-left {
+        0% {
+            -webkit-transform: scale(0);
+                    transform: scale(0);
+            -webkit-transform-origin: 0% 50%;
+                    transform-origin: 0% 50%;
+            opacity: 1;
+        }
+        100% {
+            -webkit-transform: scale(1);
+                    transform: scale(1);
+            -webkit-transform-origin: 0% 50%;
+                    transform-origin: 0% 50%;
+            opacity: 1;
+        }
+        }
+
+    </style>
+
+	<!-- Font Awesome 6.1 icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+
+
+<body>
+
+    <!-- navigation menu -->
+    <nav class="container-menu menu-desktop menu-sticky">
+        <a href="#"><img src="../../../assets/img/website-logo-custom.png" alt="website logo"></a>
+        <ul class="">
+            <li><a href="../../../index.html">Home</a></li>
+            <li><a href="../../../portfolio/index.html">Portfolio</a></li>
+            <li><a href="../../../contact/index.html" id="btn-cta" class="btn btn-primary btn-rounded"><span>Contact</span><i class="fas fa-arrow-right"></i></a></li>
+        </ul>
+        <div class="item-icon">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
+        </div>
+    </nav>
+        
+    <!-- header hero block -->
+    <header class="hero-block hero-block-js">
+        <div class="hero-text-container">
+            <h1 class="scale-in-left">Tip Calculator <span>JavaScript Project</span></h1>
+            <h2 class="scale-in-left">Calculates the tip for a restaurant bill based on the level of service and the number of customers. View my complete collection of <a href="../index.html">JavaScript projects</a>.</h2>
+        </div>
+    </header>
+
+    <!-- main content with sections -->
+    <main>
+        
+        <section class="container-flex theme-js" id="conta">
+            <div>
+                <form>
+                <p>How much was your bill?
+                
+                    <input id="billAmount" type="text" placeholder="Bill Amount"></p>
+            
+                    <p>How was your service? <select id="serviceQuality">
+                        <option disabled selected value="0">-- Choose an Option --</option>
+                        <option value="0.3">30&#37; &#45; Outstanding</option>
+                        <option value="0.2">20&#37; &#45; Good</option>
+                        <option value="0.15">15&#37; &#45; It was OK</option>
+                        <option value="0.1">10&#37; &#45; Bad</option>
+                        <option value="0.05">5&#37; &#45; Terrible</option>
+                    </select></p>
+            
+                </form>
+
+                <p>How many people are sharing the bill?
+                <input id="numOfPeople" type="text" placeholder="Number of People" maxlength="
+                4"></p>
+
+                <button type="button" class="btn btn-rounded" id="calculate" onclick="CalculateTip()"> <i class="fa-solid fa-calculator"></i>   Calculate Tip</button>
+            </div>
+            <!--calculator end-->
+            
+            <!--totalTip -->
+            <div id="tipDisplayBox">
+                <p>Total tip: €<span id="tipTotal"></span></p>
+                <p><b>Tip each: €<span id="tipEach"></span></b></p>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- JavaScript code start below -->
+    <script>
+
+        document.body.style.backgroundColor = "#fff4d9";
+
+        function CalculateTip() {
+
+            let billAmount = document.getElementById("billAmount").value;
+            let serviceQuality = document.getElementById("serviceQuality").value;
+            let numOfPeople = document.getElementById("numOfPeople").value;
+
+            var totalTip = parseFloat(billAmount) * (1 + parseFloat(serviceQuality));
+            var tip = 0;
+
+            if (parseInt(numOfPeople) > 0)
+            {
+                tip = totalTip / numOfPeople;
+            }
+            else 
+            {
+                tip = totalTip;
+            }
+
+            document.getElementById("tipEach").innerHTML = tip.toString();
+            document.getElementById("tipTotal").innerHTML = totalTip.toString();
+        }
+
+</script>
+
+    
+   
+
+    <script src="../../../assets/js/menu.js"></script>
+
+
+</body>
+</html>
+
+

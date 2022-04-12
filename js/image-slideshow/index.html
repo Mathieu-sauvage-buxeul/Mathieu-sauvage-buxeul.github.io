@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Image Slider Project | Mathieu Sauvage | Front-end Developer | </title>
+    <meta name="description" content="A sample collection of my recent JavaScript projects.">
+
+	<!-- Stylesheets -->
+    <link rel="stylesheet" href="../../../assets/css/lunadoge.min.css" />
+    <link rel="stylesheet" href="../../../assets/css/css-javascript.css" />
+
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
+    <style>
+
+        /* Global font */
+        body { font-family: 'Roboto', serif; }
+
+        /* Menu */
+        .container-menu a#btn-cta:link,
+        .container-menu a#btn-cta:visited { background-color: #fd7e14 }
+        .container-menu a#btn-cta:link,
+        .container-menu a#btn-cta:visited { border-color: #fd7e14 }
+        .container-menu a#btn-cta:focus,
+        .container-menu a#btn-cta:hover,
+        .container-menu a#btn-cta:active { border-color: #fd7e14 }
+        .container-menu a#btn-cta:focus,
+        .container-menu a#btn-cta:hover,
+        .container-menu a#btn-cta:active { border-color: #fd7e14 }
+        .container-menu a#btn-cta:focus,
+        .container-menu a#btn-cta:hover,
+        .container-menu a#btn-cta:active { background-color: #fd9843 }
+        .container-menu.menu-desktop { background-color: #212529 }
+        .container-menu.menu-mobile { background-color: #212529 }
+        .container-menu.menu-mobile ul.mobile-display { background-color: #212529 }
+        .container-menu a:link,
+        .container-menu a:visited { color: #fff }
+        .container-menu a:focus,
+        .container-menu a:hover,
+        .container-menu a:active { color: #ced4da }
+
+        /* Hero Block */
+        header.hero-block-js h1 { color: #fff }
+        header.hero-block-js h2 {
+            color: #adb5bd;
+            font-size: calc(18px + (26 - 18) * ((100vw - 320px) / (1600 - 320)));
+        }
+        header.hero-block-js { background-color: #212529}
+
+        /* Main Colours */
+        .theme-js { 
+            background-color: #fff4d9;
+        }
+
+        .theme-js .col-2 { background-color: var(--green-100) }
+        .theme-js h3 { color: #222 }
+        .theme-js p { color: #222 }
+
+        /* Button Colours: passive state */
+        .theme-js a.btn { 
+            color: #fff; background-color: #fd7e14; transition: 0.2s;
+            border-radius: 6px
+        }
+
+        /* Button Colours: active state */
+        .theme-js a.btn:hover { background-color: #343a40 }
+
+        .theme-js a.btn { background-image: linear-gradient(to right,#e052a0,#f15c41) } 
+        .theme-js a.btn:hover { filter: brightness(140%) saturate(140%) } 
+        .container-slider { width: 100%; padding: 0 15px; margin: 0 auto }
+
+        .container-outer { 
+            max-width: 1140px;
+            text-align: center;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .container-img { 
+            align-items: center !important;
+            min-height: 596px; 
+            background: url("assets/img/dublin-0.jpg");
+            background-repeat: no-repeat;
+            /* background-attachment: fixed; */
+            background-position: center; 
+            background-size: contain; 
+            border: 12px solid #fd7e14;
+            border-radius: 15px;
+            position: relative;
+            margin: 0 auto;
+            flex: 0 0 83.333333%;
+            max-width: 83.333333%;
+            flex: 0 0 80%;
+            max-width: 80%;
+        }
+
+        @media (max-width: 767px) {
+            .container-img { min-height: 30vh } 
+        }
+
+        .btn-left, .btn-right {
+            position: absolute; top: 50%;
+            background: #fd7e14; color: #fff;
+            font-size: 1.2rem;
+            padding: 15px 30px;
+        }
+
+        .btn-left { left: 0; transform: translate(-50%, -50%) }
+        .btn-right { right: 0; transform: translate(50%, -50%); }
+
+        /* Footer */
+        footer h2 { color: #fff; }
+        footer h3 { color: #fd7e14; }
+        footer { background-color: #343a40; }
+        .footer-links, .footer-icons {  color: #fff; }
+
+        /**
+        * ----------------------------------------
+        * animation scale-in-left
+        * ----------------------------------------
+        */
+
+        .scale-in-left {
+	        -webkit-animation: scale-in-left 0.8s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	        animation: scale-in-left 0.8s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+        }
+
+        @-webkit-keyframes scale-in-left {
+        0% {
+            -webkit-transform: scale(0);
+                    transform: scale(0);
+            -webkit-transform-origin: 0% 50%;
+                    transform-origin: 0% 50%;
+            opacity: 1;
+        }
+        100% {
+            -webkit-transform: scale(1);
+                    transform: scale(1);
+            -webkit-transform-origin: 0% 50%;
+                    transform-origin: 0% 50%;
+            opacity: 1;
+        }
+        }
+        @keyframes scale-in-left {
+        0% {
+            -webkit-transform: scale(0);
+                    transform: scale(0);
+            -webkit-transform-origin: 0% 50%;
+                    transform-origin: 0% 50%;
+            opacity: 1;
+        }
+        100% {
+            -webkit-transform: scale(1);
+                    transform: scale(1);
+            -webkit-transform-origin: 0% 50%;
+                    transform-origin: 0% 50%;
+            opacity: 1;
+        }
+        }
+
+    </style>
+
+	<!-- Font Awesome 6.1 icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+
+
+<body>
+
+    <!-- navigation menu -->
+    <nav class="container-menu menu-desktop menu-sticky">
+        <a href="#"><img src="../../../assets/img/website-logo-custom.png" alt="website logo"></a>
+        <ul class="">
+            <li><a href="../../../index.html">Home</a></li>
+            <li><a href="../../../portfolio/index.html">Portfolio</a></li>
+            <li><a href="../../../contact/index.html" id="btn-cta" class="btn btn-primary btn-rounded"><span>Contact</span><i class="fas fa-arrow-right"></i></a></li>
+        </ul>
+        <div class="item-icon">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
+        </div>
+    </nav>
+        
+    <!-- header hero block -->
+    <header class="hero-block hero-block-js">
+        <div class="hero-text-container">
+            <h1 class="scale-in-left">Image Slideshow <span>JavaScript Project</span></h1>
+            <h2 class="scale-in-left">A slideshow based on an array of images of Dublin city, Ireland. View my complete collection of <a href="../index.html">JavaScript projects</a>.</h2>
+        </div>
+    </header>
+
+    <!-- main content with sections -->
+    <main>
+        
+        <section class="container-flex theme-js">
+
+            <div class="container-slider">
+                <div class="container-outer">
+                    <div class="container-img">
+                    
+                    <a class="btn btn-left"><i class="fas fa-caret-left"></i></a>
+                    <a class="btn btn-right"><i class="fas fa-caret-right"></i></a>
+                    
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <script>
+
+        (function() {
+        const pictures = [
+            "dublin-0",
+            "dublin-1",
+            "dublin-2",
+            "dublin-3",
+            "dublin-4",
+            "dublin-5"
+        ];
+
+        // Select both left and right button. Add event listeners
+        const buttons = document.querySelectorAll('.btn')
+        const imageDIV = document.querySelector('.container-img')
+        let counter = 0
+
+        buttons.forEach(function(button){
+        button.addEventListener('click', function(e) {
+                    
+            if (button.classList.contains('btn-left')) {
+                counter--;
+                if (counter < 0) {
+                    counter = pictures.length - 1;
+                }
+                imageDIV.style.backgroundImage = `url('assets/img/${pictures[counter]}.jpg')`
+                console.log(imageDIV.style.backgroundImage = `url('assets/img/${pictures[counter]}.jpg')`)
+            }
+
+            if (button.classList.contains('btn-right')) {
+                counter++;
+                if (counter > pictures.length - 1) {
+                counter = 0;
+            }
+            imageDIV.style.backgroundImage = `url('assets/img/${pictures[counter]}.jpg')`
+            console.log(imageDIV.style.backgroundImage = `url('assets/img/${pictures[counter]}.jpg')`)
+            }
+            }) // Ends loop for left and right arrows
+        })
+        })();
+
+    </script>
+
+    
+   
+    
+
+		
+
+    <script src="../../../assets/js/menu.js"></script>
+
+
+</body>
+</html>
+

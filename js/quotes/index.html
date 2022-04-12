@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Random Quotes Generator Project | Mathieu Sauvage | Front-end Developer | </title>
+    <meta name="description" content="Uses the Fetch API to retrieve a randomly-choosen selection of ten inspiring quotations.">
+
+	<!-- Stylesheets -->
+    <link rel="stylesheet" href="../../../assets/css/lunadoge.min.css" />
+    <link rel="stylesheet" href="../../../assets/css/css-javascript.css" />
+
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
+    <style>
+
+        /* Global font */
+        body { font-family: 'Roboto', serif; }
+
+        /* Menu */
+        .container-menu a#btn-cta:link,
+        .container-menu a#btn-cta:visited { background-color: #fd7e14 }
+        .container-menu a#btn-cta:link,
+        .container-menu a#btn-cta:visited { border-color: #fd7e14 }
+        .container-menu a#btn-cta:focus,
+        .container-menu a#btn-cta:hover,
+        .container-menu a#btn-cta:active { border-color: #fd7e14 }
+        .container-menu a#btn-cta:focus,
+        .container-menu a#btn-cta:hover,
+        .container-menu a#btn-cta:active { border-color: #fd7e14 }
+        .container-menu a#btn-cta:focus,
+        .container-menu a#btn-cta:hover,
+        .container-menu a#btn-cta:active { background-color: #fd9843 }
+        .container-menu.menu-desktop { background-color: #212529 }
+        .container-menu.menu-mobile { background-color: #212529 }
+        .container-menu.menu-mobile ul.mobile-display { background-color: #212529 }
+        .container-menu a:link,
+        .container-menu a:visited { color: #fff }
+        .container-menu a:focus,
+        .container-menu a:hover,
+        .container-menu a:active { color: #ced4da }
+
+        /* Hero Block */
+        header.hero-block-js h1 { color: #fff }
+        header.hero-block-js h2 {
+            color: #adb5bd;
+            font-size: calc(18px + (26 - 18) * ((100vw - 320px) / (1600 - 320)));
+        }
+        header.hero-block-js { background-color: #212529}
+
+        /* Main Colours */
+        .theme-js { 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: auto;
+            width: 80%;
+            text-align: center;
+        }
+
+        .theme-js h3 { color: #495057; margin-bottom: 35px;}
+        .theme-js h2 { color: #212529; }
+        .theme-js button { padding: 15px 35px; }
+        .container-flex { margin: 50px auto; }
+
+        .quotes {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            width: 100%;
+            margin: auto;
+        }
+
+        /* Button */
+        .theme-js a.btn { 
+            margin-top: 35px;
+            padding: 15px 50px; 
+            border: none; 
+            color: #fff; 
+            background-color: #000; 
+            transition: 0.2s 
+        }
+        .theme-js a.btn:hover { background-color: #495057 }
+
+        /* Footer */
+        footer h2 { color: #fff; }
+        footer h3 { color: #fd7e14; }
+        footer { background-color: #343a40; }
+        .footer-links, .footer-icons {  color: #fff; }
+
+        /**
+        * ----------------------------------------
+        * animation scale-in-left
+        * ----------------------------------------
+        */
+
+        .scale-in-left {
+	        -webkit-animation: scale-in-left 0.8s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	        animation: scale-in-left 0.8s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+        }
+
+        @-webkit-keyframes scale-in-left {
+        0% {
+            -webkit-transform: scale(0);
+                    transform: scale(0);
+            -webkit-transform-origin: 0% 50%;
+                    transform-origin: 0% 50%;
+            opacity: 1;
+        }
+        100% {
+            -webkit-transform: scale(1);
+                    transform: scale(1);
+            -webkit-transform-origin: 0% 50%;
+                    transform-origin: 0% 50%;
+            opacity: 1;
+        }
+        }
+        @keyframes scale-in-left {
+        0% {
+            -webkit-transform: scale(0);
+                    transform: scale(0);
+            -webkit-transform-origin: 0% 50%;
+                    transform-origin: 0% 50%;
+            opacity: 1;
+        }
+        100% {
+            -webkit-transform: scale(1);
+                    transform: scale(1);
+            -webkit-transform-origin: 0% 50%;
+                    transform-origin: 0% 50%;
+            opacity: 1;
+        }
+        }
+
+    </style>
+
+	<!-- Font Awesome 6.1 icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+
+
+<body>
+
+    <!-- navigation menu -->
+    <nav class="container-menu menu-desktop menu-sticky">
+        <a href="#"><img src="../../../assets/img/website-logo-custom.png" alt="website logo"></a>
+        <ul class="">
+            <li><a href="../../../index.html">Home</a></li>
+            <li><a href="../../../portfolio/index.html">Portfolio</a></li>
+            <li><a href="../../../contact/index.html" id="btn-cta" class="btn btn-primary btn-rounded"><span>Contact</span><i class="fas fa-arrow-right"></i></a></li>
+        </ul>
+        <div class="item-icon">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
+        </div>
+    </nav>
+        
+    <!-- header hero block -->
+    <header class="hero-block hero-block-js">
+        <div class="hero-text-container">
+            <h1 class="scale-in-left">Random Quotes Generator <span>JavaScript Project</span></h1>
+            <h2 class="scale-in-left">Uses the Fetch API to retrieve a randomly-choosen selection of ten inspiring quotations. View my complete collection of <a href="../index.html">JavaScript projects</a>.</h2>
+        </div>
+    </header>
+
+    <!-- main content with sections -->
+    <main>
+        
+        <section class="container-flex theme-js">
+
+            <div class="col-1 text-center">
+                <h2>Inspiring Quotations</h2>
+                <h3>Click the button below to be inspired by nine uplifting quotations from wise men and women through the ages.</h3>
+    
+                <a class="btn btn-primary btn-rounded" id="btn-quotes" onclick="UpdateQuotations()">View Quotes</a>
+            </div>
+
+            <div class="quotes" id="quotes-box">
+                <div class="col-3">
+                    <p id="text-1">Text of quotation here 1.</p>
+                    <h3 id="author-1">Author 1</h3>
+                </div>
+    
+                <div class="col-3">
+                    <p id="text-2">Text of quotation here 2.</p>
+                    <h3 id="author-2">Author 2</h3>
+                </div>
+    
+                <div class="col-3">
+                    <p id="text-3">Text of quotation here 3.</p>
+                    <h3 id="author-3">Author 3</h3>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- JavaScript -->
+    <script>
+
+        document.body.style.backgroundColor = "#fff4d9";
+
+        document.querySelector("#btn-quotes").addEventListener("change", UpdateQuotations);
+
+        var getJSON = function(url, callback) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', url, true);
+            xhr.responseType = 'json';
+            xhr.onload = function() {
+                var status = xhr.status;
+                if (status === 200)
+                {
+                    callback(null, xhr.response);
+                }
+                else
+                {
+                    callback(status, xhr.response);
+                }
+            };
+            xhr.send();
+        };
+
+        function UpdateQuotations() {
+            getJSON('https://type.fit/api/quotes',
+            function(err, data) {
+                if (err !== null) 
+                {
+                    alert('Something went wrong: ' + err);
+                }
+                else
+                {
+                    for (let i = 1; i <= 3; i++)
+                    {
+                        const r = Math.floor(Math.random() * data.length);
+                        document.getElementById("text-" + i).innerHTML = data[r].text;
+                        document.getElementById("author-" + i).innerHTML = data[r].author;
+                    }
+                }
+            });
+        }
+
+    </script>
+
+    
+    
+
+    <script src="../../../assets/js/menu.js"></script>
+
+
+</body>
+</html>
+
+
